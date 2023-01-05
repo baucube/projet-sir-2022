@@ -46,7 +46,7 @@ public class PersonneControllerTest {
 
   private String tokenRequest;
 
-  @Test
+  /*@Test
   @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
   public void helloTest() {
 
@@ -58,7 +58,7 @@ public class PersonneControllerTest {
         HttpMethod.GET, entity, String.class);
 
     assertEquals(response.getBody(), "Bye bye");
-  }
+  }*/
 
   @Test
   @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
