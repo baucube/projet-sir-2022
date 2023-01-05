@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('Source') {
             steps{
-                git branch: 'main', url: 'https://github.com/baucube/genie_logiciel_groupe3.git'
+                git branch: 'main', url: 'https://github.com/baucube/projet-sir-2022.git'
             }
         }
 
