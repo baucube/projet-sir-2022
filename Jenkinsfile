@@ -4,12 +4,6 @@ pipeline{
         maven '3.8.6'
     }
 
-    environment {
-            registry = "baucube/test1"
-            registryCredential = 'dockerhub'
-            dockerImage = ''
-    }
-
     stages{
         stage('Source') {
             steps{
@@ -36,24 +30,24 @@ pipeline{
                 sh 'echo "Deploying into Server dev."'
             }
         }
-
-        stage('Building image') {
-             steps{
-                    script {
-                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    }
-             }
+        stage('Build Docker image'){
+            script{
+                sh 'docker build -t baucube/groupe3:1  .'
+            }
         }
 
-         stage('Deploy Image') {
-              steps{
-                   script {
-                       docker.withRegistry( '', registryCredential ) {
-                            dockerImage.push()
-                       }
-                   }
-              }
-         }
+        stage('Push Image to Hub'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubpassword')]) {
+                        // some block
+                        sh 'docker login -u baucube -p ${dockerhubpassword}'
+
+                        sh 'docker push baucube/groupe3:1'
+                    }
+                }
+            }
+        }
     } // stages
 
     post {
