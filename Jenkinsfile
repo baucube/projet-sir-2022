@@ -16,14 +16,6 @@ pipeline{
             }
         }
 
-        stage('Building image') {
-              steps{
-                script {
-                  docker.build registry + ":$BUILD_NUMBER"
-                }
-              }
-        }
-
         stage ('Build') {
             steps{
                 sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
@@ -43,6 +35,14 @@ pipeline{
                 sh 'echo "Deploying into Server dev."'
             }
         }
+
+         stage('Building image') {
+              steps{
+                    script {
+                         docker.build registry + ":$BUILD_NUMBER"
+                    }
+              }
+         }
     } // stages
 
     post {
