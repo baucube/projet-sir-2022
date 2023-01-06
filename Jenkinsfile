@@ -31,8 +31,10 @@ pipeline{
             }
         }
         stage('Build Docker image'){
-            script{
-                sh 'docker build -t baucube/groupe3:1  .'
+            steps{
+                script{
+                    sh 'docker build -t baucube/groupe3:1  .'
+                }
             }
         }
 
