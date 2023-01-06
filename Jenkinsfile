@@ -38,7 +38,7 @@ pipeline{
             }
         }
 
-        stage('Push Image to Hub'){
+        stage('Push Image to Hub Must work now'){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'dockerhubid', variable: 'dockerhubpassword')]) {
