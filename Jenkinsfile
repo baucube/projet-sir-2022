@@ -30,7 +30,7 @@ pipeline{
                 sh 'echo "Deploying into Server dev."'
             }
         }
-        stage('Build Docker image'){
+        stage('Build Docker image yes'){
             steps{
                 script{
                     sh 'docker build -t baucube/groupe3:1  .'
