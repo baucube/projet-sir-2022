@@ -4,11 +4,24 @@ pipeline{
         maven '3.8.6'
     }
 
+    environment {
+            registry = "baucube/sir2022:1"
+            registryCredential = 'dockerhub'
+    }
+
     stages{
         stage('Source') {
             steps{
                 git branch: 'main', url: 'https://github.com/baucube/projet-sir-2022.git'
             }
+        }
+
+        stage('Building image') {
+              steps{
+                script {
+                  docker.build registry + ":$BUILD_NUMBER"
+                }
+              }
         }
 
         stage ('Build') {
