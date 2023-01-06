@@ -5,8 +5,9 @@ pipeline{
     }
 
     environment {
-            registry = "baucube/sir2022:1"
+            registry = "baucube/test1"
             registryCredential = 'dockerhub'
+            dockerImage = ''
     }
 
     stages{
@@ -36,11 +37,21 @@ pipeline{
             }
         }
 
-         stage('Building image') {
-              steps{
+        stage('Building image') {
+             steps{
                     script {
-                         docker.build registry + ":$BUILD_NUMBER"
+                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
+             }
+        }
+
+         stage('Deploy Image') {
+              steps{
+                   script {
+                       docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                       }
+                   }
               }
          }
     } // stages
