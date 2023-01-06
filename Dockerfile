@@ -1,5 +1,5 @@
 #Image de base
-FROM  openjdk:17-alpine
+FROM  openjdk:11
 LABEL maintainer="clarissetomavo.bi@gmail.com"
 VOLUME /main-app
 ADD target/formation-demo1-0.0.1-SNAPSHOT.jar app.jar
