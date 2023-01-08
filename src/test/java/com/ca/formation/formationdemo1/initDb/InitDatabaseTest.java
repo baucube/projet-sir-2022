@@ -26,8 +26,9 @@ class InitDatabaseTest {
     }
 
     @Test
-    void exception(){
+    void testException(){
         Exception exception = assertThrows(Exception.class, () ->
                 utilisateurService.registration(new Utilisateur("michel@formation.sn", "Passer@123", "Michel", Set.of(new Role(Role.READ)))));
+        //assertEquals(e.printStackTrace(), exception.getMessage());
     }
 }
