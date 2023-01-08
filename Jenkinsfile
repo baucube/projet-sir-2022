@@ -5,7 +5,7 @@ pipeline{
     }
 
     stages{
-        stage('Source') {
+        stage('Source SonarQube') {
             steps{
                 git branch: 'main', url: 'https://github.com/baucube/projet-sir-2022.git'
             }
