@@ -10,22 +10,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 public class PersonneServiceImplTest {
 
   @Mock
   PersonneRepository personneRepository;
-
 
   @InjectMocks
   private PersonneServiceImpl personneServiceImpl;
@@ -44,6 +42,24 @@ public class PersonneServiceImplTest {
   }
 
   // TODO: ajouter les autres tests sur methodes
+  @Test
+  public void deletePersonne(){
+    doNothing().when(personneRepository).deleteById((Long) any());
+    personneServiceImpl.deletePersonne(15L); //id de la personne ajouté dans ajouterPesonne personneControllerTest
+    verify(personneRepository).deleteById((Long) any());
+  }
+
+  @Test //à corriger
+  public void testGetPersonneParNom(){
+    ArrayList<Personne> personneList = new ArrayList<>();
+
+    when(personneRepository.findByNom((String) any())).thenReturn(personneList);
+
+    List<Personne> actualPersonneParNom = personneServiceImpl.getPersonneParNom("TOMAVO");
+    assertSame(personneList, actualPersonneParNom);
+    assertTrue(actualPersonneParNom.isEmpty());
+    verify(personneRepository).findByNom((String) any());
+  }
 
   @Test //Juste
   public void testUpdatePersonne() throws ResourceNotFoundException {
@@ -80,6 +96,19 @@ public class PersonneServiceImplTest {
   public void getPersonnnes(){
     List<Personne> listPersonne = this.personneServiceImpl.getPersonnes();
     assertNotNull(listPersonne);
+  }
+
+  @Test
+  public void getPersonne() throws ResourceNotFoundException {
+    Personne personne = new Personne();
+    personne.setAge(18);
+    personne.setId(15L);
+    personne.setNom("TOMAVO");
+    personne.setPrenom("Clarisse");
+    Optional<Personne> ofResult = Optional.of(personne);
+    when(personneRepository.findById((Long) any())).thenReturn(ofResult);
+    assertSame(personne, personneServiceImpl.getPersonne(15L));
+    verify(personneRepository).findById((Long) any());
   }
 
   @Test
