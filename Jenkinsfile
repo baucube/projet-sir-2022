@@ -16,7 +16,7 @@ pipeline{
                 sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
             }
         }
-        stage ('SonarQube Analysis') {
+        stage ('SonarQube') {
             steps{
                 sh 'mvn sonar:sonar'
             }
