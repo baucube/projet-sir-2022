@@ -110,7 +110,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <sonar.host.url>http://10.153.196.44:9000</sonar.host.url>
+                <sonar.host.url>http://192.168.1.6:9000</sonar.host.url>
                 <sonar.login>admin</sonar.login>
                 <sonar.password>admin123</sonar.password>
             </properties>
