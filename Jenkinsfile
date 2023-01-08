@@ -27,7 +27,7 @@ pipeline{
                 message 'Do you want to proceed for deployment?'
             }
             steps{
-                sh 'echo "Deploying into Server dev."'
+                sh 'echo "Deploying into Server deve."'
             }
         }
         stage('Build Docker image yes'){
