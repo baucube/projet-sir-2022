@@ -18,11 +18,14 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @RunWith(SpringRunner.class)
 public class PersonneServiceImplTest {
 
   @Mock
   PersonneRepository personneRepository;
+
 
   @InjectMocks
   private PersonneServiceImpl personneServiceImpl;
@@ -73,10 +76,29 @@ public class PersonneServiceImplTest {
     verify(personneRepository).findById((Long) any());
   }
 
-
   @Test
   public void getPersonnnes(){
     List<Personne> listPersonne = this.personneServiceImpl.getPersonnes();
     assertNotNull(listPersonne);
+  }
+
+  @Test
+  public void findByNomLike() {
+    String nom = "Barry";
+    List<Personne> personnes = this.personneServiceImpl.findByNomLike(nom);
+    assertEquals("Barry",nom);
+  }
+
+  @Test
+  public void findByPrenom(){
+    String prenoms = "Boubacar";
+    List<Personne> personneList = this.personneServiceImpl.findByPrenomLike(prenoms);
+    assertEquals("Boubacar", prenoms);
+  }
+
+  @Test
+  public void count(){
+    Long nombrePersonnes = this.personneServiceImpl.count();
+    assertEquals(nombrePersonnes,personneRepository.count());
   }
 }
