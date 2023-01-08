@@ -5,6 +5,7 @@ import com.ca.formation.formationdemo1.models.Personne;
 import com.ca.formation.formationdemo1.models.Role;
 import com.ca.formation.formationdemo1.services.PersonneService;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -84,6 +85,21 @@ public class ApiPersonneController {
     public ResponseEntity<List<Personne>> getPersonneParNom(@RequestParam(name = "nom") String nom){
         List<Personne> personnes = personneService.getPersonneParNom(nom);
         return ResponseEntity.ok().body(personnes);
+    }
+
+    @GetMapping("/noms")
+    ResponseEntity<List<Personne>> findByNomLike(String nom){
+        return new ResponseEntity<List<Personne>>(personneService.findByNomLike("%"+nom+"%"), HttpStatus.OK);
+    }
+
+    @GetMapping("/prenoms")
+    ResponseEntity<List<Personne>> findByPrenomLike(String prenom){
+        return new ResponseEntity<List<Personne>>(personneService.findByPrenomLike("%"+prenom+"%"),HttpStatus.OK);
+    }
+
+    @GetMapping("/nombrepersonnes")
+    public Long count(){
+        return personneService.count();
     }
 
 }

@@ -56,4 +56,19 @@ public class PersonneServiceImpl implements PersonneService {
         return personneRepository.findByNom(nom);
     }
 
+    @Override
+    public List<Personne> findByNomLike(String nom) {
+        return personneRepository.findByNomLike(nom);
+    }
+
+    @Override
+    public List<Personne> findByPrenomLike(String prenom) {
+        return personneRepository.findByPrenomLike(prenom);
+    }
+
+    @Override
+    public Long count() {
+        return personneRepository.count();
+    }
+
 }

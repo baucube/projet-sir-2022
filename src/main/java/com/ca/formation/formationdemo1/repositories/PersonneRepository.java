@@ -21,4 +21,9 @@ public interface PersonneRepository extends CrudRepository<Personne, Long> {
 
     List<Personne> ageGreaterThan(int age);
 
+
+    List<Personne> findByNomLike(String nom);
+
+    List<Personne> findByPrenomLike(String prenom);
+
 }

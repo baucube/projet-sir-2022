@@ -18,4 +18,10 @@ public interface PersonneService {
     void deletePersonne(Long id);
 
     List<Personne> getPersonneParNom(String nom);
+
+    List<Personne> findByNomLike(String nom);
+
+    List<Personne> findByPrenomLike(String prenom);
+
+    Long count();
 }
