@@ -1,17 +1,17 @@
 version : "3"
 services:
   app:
-    container_name: agl_m1sir
-    image: agl_m1sir
+    container_name: groupe3
+    image: groupe3
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9090:9090"
+      - "8083:8083"
     depends_on:
       - dbpostgresql
   dbpostgresql:
-    container_name: agl_m1sir-db
+    container_name: groupe3-db
     image: postgres:9.6
     ports:
       - "5432:5432"
