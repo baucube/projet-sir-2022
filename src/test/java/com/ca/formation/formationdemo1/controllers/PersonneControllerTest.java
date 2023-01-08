@@ -60,6 +60,22 @@ public class PersonneControllerTest {
     assertEquals(response.getBody(), "Bye bye");
   }*/
 
+/*  @Test
+  @WithMockUser(username = "clara@formation.sn", password = "Passer@123", authorities = { "ADMIN" })
+  public void byeTest() {
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + tokenRequest);
+    HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+    ResponseEntity<String> response = this.restTemplate.exchange("http://localhost:9090"+"/api/v2/personnes/bye",
+            HttpMethod.GET, entity, String.class);
+
+    //System.out.println("+++++++++++++++++++++" +response.() +" ++++++++++");
+    assertEquals(response.getBody(), "Bye bye");
+
+  }*/
+
   @Test
   @WithMockUser(username = "michel@formation.sn", password = "Passer@123", authorities = { "READ" })
   public void getPersonnes() throws Exception {
